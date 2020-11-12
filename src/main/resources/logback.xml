@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configuration>
+    <property name="LOGS" value="./logs" />
+
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <jmxConfigurator/>
+
+    <timestamp key="bySecond" datePattern="yyyy'-'MM'-'dd'T'HH-mm-ss"/>
+    <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--derby.system.home is populate in Configuration.java file-->
+        <file>${LOGS}/disbursement-gateway.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--rollover daily-->
+            <fileNamePattern>${LOGS}/archived/disbursement-gateway-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+
+                <!--or whenever the file size reaches 10MB-->
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d [%t] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="ROLLING" />
+    </root>
+
+</configuration>

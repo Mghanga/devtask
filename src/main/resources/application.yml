@@ -1,0 +1,30 @@
+server:
+  port: 7000
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/disbursement-gateway?useSSL=false
+    username: county
+    password: Pass@123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    tomcat:
+      test-while-idle: true
+      validation-query: SELECT 1
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQLDialect
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+
+daraja:
+  access_token_url: https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials
+  b2c:
+    initiator: 174379
+    consumer_key: fdDYnHUts4UX0FWrNsnOWu9HFpQIY3XC
+    consumer_secret: VaOfhaDktGrGABis
+    requestUrl: https://sandbox.safaricom.co.ke/mpesa/b2c/v1/paymentrequest
+    callBackUrl: https://fd209c0c.ngrok.io/api/v1/disburse/callback
+    timeoutUrl: https://fd209c0c.ngrok.io/api/v1/disburse/time-out
+    security_credentials: S4Vt47xZoPgXfZ4/d72tYaGqjcbcyDaMNe+Pk2URgXc1lHpLeUbjZO7dMKFv1NIducDdO063TtTMXmVVKfP9BS568CONjQFn75JRa/2ULXh1zdIjl8OTcqC+ABViGIkboINUEUYCxKT/j81bXwgFHGk4tyvGmsgFPOGhear3tQN2/opLyDnMIuVwea6uGP4zW5no+P4fhv4sr0BVY+obhpNX57+v7bcBfsrTkHnCjh4ah6MVbw0pr7Tofs2d5RmvNXZdFMsPB3uNIuUGMglU4z33NKLBdXwI7LFl7InGO6Nj/gRBtfCtbcG4R1k4ZI4RIBIfh0QFoLNqgq4hzYUxlg==

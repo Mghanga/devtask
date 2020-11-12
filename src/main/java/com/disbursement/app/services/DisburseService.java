@@ -126,6 +126,7 @@ public class DisburseService implements DisburseServiceInterface {
         header.setConversationID( transaction.getConversationId() );
         header.setStatusMessage( transaction.getResponseDescription() );
         header.setStatusCode( transaction.getResponseCode() );
+        baseResponse.setHeader( header );
 
         return ResponseEntity.ok().body( baseResponse );
     }
@@ -203,9 +204,15 @@ public class DisburseService implements DisburseServiceInterface {
         payload.put("referenceNo", transaction.getOriginatorConversationId());
         payload.put("mpesaRefNo", mpesaRefNo );
 
+        BaseResponse baseResponse = new BaseResponse();
+        BaseResponse.Header header = new BaseResponse.Header();
+        header.setConversationID( transaction.getConversationId() );
+        header.setStatusMessage( transaction.getResponseDescription() );
+        header.setStatusCode( transaction.getResponseCode() );
+        baseResponse.setHeader( header );
         ResponseEntity<String> responseEntity = httpService.postRequest(
                 transaction.getResultUrl(),
-                payload
+                baseResponse
         );
 
         // TODO: Report the status of this transaction
